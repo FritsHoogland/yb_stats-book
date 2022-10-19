@@ -24,7 +24,7 @@ Be conservative with parallellism. See [parallel](./specifying_parallel.md)
 4. Schedule `yb_stats` in crontab
 ```
 crontab -e
-5 */1 * * * yb_stats_path="/home/yugabyte/yb_stats-history" && (date && cd $yb_stats_path && /usr/local/bin/yb_stats --snapshot) >> ${yb_stats_path}/yb_stats_run.out >& 
+5 */1 * * * yb_stats_path="/home/yugabyte/yb_stats-history" && (date && cd $yb_stats_path && /usr/local/bin/yb_stats --snapshot) >> $yb_stats_path/yb_stats_run.out 2>&1
 ```
 
 
