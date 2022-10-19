@@ -899,7 +899,7 @@ Be conservative with parallellism. See <a href="./specifying_parallel.html">para
 <li>Schedule <code>yb_stats</code> in crontab</li>
 </ol>
 <pre><code>crontab -e
-5 */1 * * * yb_stats_path=&quot;/home/yugabyte/yb_stats-history&quot; &amp;&amp; (date &amp;&amp; cd $yb_stats_path &amp;&amp; /usr/local/bin/yb_stats --snapshot) &gt;&gt; ${yb_stats_path}/yb_stats_run.out &gt;&amp; 
+5 */1 * * * yb_stats_path=&quot;/home/yugabyte/yb_stats-history&quot; &amp;&amp; (date &amp;&amp; cd $yb_stats_path &amp;&amp; /usr/local/bin/yb_stats --snapshot) &gt;&gt; $yb_stats_path/yb_stats_run.out 2&gt;&amp;1
 </code></pre>
 <p>-----experimental</p>
 <ol start="5">
