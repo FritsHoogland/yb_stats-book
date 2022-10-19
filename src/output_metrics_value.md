@@ -10,7 +10,7 @@ This is how value statistic output looks like:
 192.168.66.80:12000  server   voluntary_context_switches                                                         217 csws           268.564 /s
 ```
 - The first column contains the ip address or hostname a colon and the port number.
-- The second column is the type (metric_type) of the statistic. Possible values are server, cluster, table, tablet and cdc.
+- The second column is the type (metric_type) of the statistic. Possible values are server, cluster, table, tablet and cdc. Currently, value type statistics are found in server, cluster table and tablet types.
 - The third column is the statistic name.
 - The fourth column is the statistic value. By default, counter values are shown, for which this value is the end snapshot value subtracted by the first value.
 - The fifth column is the unit of the statistic value.
@@ -40,7 +40,7 @@ The columns do not change. The change specific to gauge values, and with which g
 
 The value in the fourth column shows the END snapshot value, and the value in the sixth column shows the difference between the END and the BEGIN snapshot value.
 
-If the '--details-enable` switch is used, the output changes to include metric_id, namespace and object_name. This is how that looks like:
+If the `--details-enable` switch is used, the output changes to include metric_id, namespace and object_name. This is how that looks like:
 ```
 192.168.66.80:9000   server   -               -               -                              tcp_bytes_received                                                               75765 bytes         4293.608 /s
 192.168.66.80:9000   server   -               -               -                              tcp_bytes_sent                                                                   80901 bytes         4584.665 /s
@@ -66,3 +66,4 @@ The columns added are the third, fourth and fifth columns.
 - The third column shows the metric_id, which for the tablet is the tablet UUID, for the a table is table_id, and for cdc is ?.
 - The fourth column shows the namespace_name.
 - The sixth column shows the object_name (it says 'table_name' in the attributes in the metric page, but an object can be an index or materialized view too).
+A 'server' metric_type does not carry meaningful a meaningful value in 'metric_id', and the namespace_name and object name is not present. Therefore, for server a '-' is shown. 
