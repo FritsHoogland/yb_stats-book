@@ -11,7 +11,7 @@
     - [.env](./dotenv.md)
     - [yb_stats snapshot results](./snaphost_results.md)
 - [Snapshot mode](./snapshot_mode.md)
-- [Output modes](.output_modes.md)
+- [Output modes](./output_modes.md)
     - [Ad-hoc mode (in memory diff)](./ad-hoc_mode.md)
     - [Snapshot-diff mode](./ad-hoc_mode.md)
     - [Print modes](./print_mode.md)
