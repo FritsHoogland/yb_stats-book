@@ -37,3 +37,4 @@
         - [print-rpcs](./print_mode_rpcs.md)
         - [print-threads](./print_mode_threads.md)
 - [Crontab](./crontab.md)
+- [Troubleshooting](./troubleshooting.md)
