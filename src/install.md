@@ -12,6 +12,16 @@ brew install yb_stats
 ```
 yb_stats is available in /usr/local/bin, which should normally be in $PATH.
 
+### Uninstall yb_stasts via homebrew
+Remove yb_stats:
+```shell
+brew uninstall yb_stats
+```
+Remove the yb_stats "brew tap":
+```shell
+brew untap fritshoogland-yugabyte/yb_stats
+```
+
 ## RPM based distributions
 
 Install the provided yb_stats RPM via yum:
