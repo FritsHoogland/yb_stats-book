@@ -4,6 +4,7 @@
 
 - [Data sources](./data_sources.md)
 - [Install](./install.md)
+    - [Upgrade](./upgrade.md)
 - [Running yb_stats](./running_yb_stats.md)
     - [Specifying hosts](./specifying_hosts.md)
     - [Specifying ports](./specifying_ports.md)
