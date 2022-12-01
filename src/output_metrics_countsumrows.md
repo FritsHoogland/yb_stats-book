@@ -17,9 +17,9 @@ This is how countsumrows statistic output looks like:
 ```
 Explanation:
 
-| hostname:port        | statistic name                                                       | count | sum / snapshot time (s) | sum total    | sum unit | rows / count | rows total  |
-|----------------------|----------------------------------------------------------------------|-------|-------------------------|--------------|----------|--------------|-------------|
-| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_InsertStmt                | 1     | avg: 18.552             | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
-| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_SingleShardTransactions   | 1     | avg: 18.552             | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
-| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_Single_Shard_Transactions | 1     | avg: 18.552             | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
-| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_Transactions              | 1     | avg: 18.552             | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
+| hostname:port        | statistic name                                                       | count | sum / count | sum total    | sum unit | rows / count | rows total  |
+|----------------------|----------------------------------------------------------------------|-------|-------------|--------------|----------|--------------|-------------|
+| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_InsertStmt                | 1     | avg: 18.552 | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
+| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_SingleShardTransactions   | 1     | avg: 18.552 | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
+| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_Single_Shard_Transactions | 1     | avg: 18.552 | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
+| 192.168.66.80:13000  | handler_latency_yb_ysqlserver_SQLProcessor_Transactions              | 1     | avg: 18.552 | tot: 18.552  | ms       | avg:  1      | tot: 1 rows |
