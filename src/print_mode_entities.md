@@ -1,36 +1,75 @@
 # print-entities
+Print entities (database, database object, tablet, replica) from a live cluster or from a snapshot.
 
-The `--print-entities` siwtch takes a single argument, which is a snapshot number.
-
+- `--print-entities <snapshot number>`: print entities from a stored snapshot.
+- `--print-entities`: print entities from a live cluster.
+ 
 Additional switches:
-- `--hostname-match` to filter one or more entity source hosts.
-- `--table-name-match` to filter an object name.
+- `--hostname-match`: filter by hostname or port regular expression.
+- `--table-name-match`: filter by object name regular expression.
+- `--details-enable`: print the entity information from all masters.
 
-When using `--print-entities` to find objects and their layout on a cluster, be aware that all masters, so the leader as well as the followers provide data via the /dump-entities endpoint. Using the entities information from multiple masters can be handy to validate synchronisation and split-brain situations, but the most common usecase that I see would be to lookup objects.
+The entity information is available on the masters, on the leader and the followers.
+In order to get the current information, `yb_stats` fetches information to learn the master leader first, and then obtains the entity information from the master leader, unless the `--details-enable` switch is set.
 
-Looking up object is most logical to do from the master leader, because that would be place where the cluster will get its data. Two common ways of doing that are:
-- Using `--print-masters` for the snapshot number you want to use, and then look for the Role:LEADER.
-- Use `--snapshot-diff`: 
-```shell
-yb_stats --snapshot-diff --hostname-match 7000 --gauges-enable --stat-name-match is_raft_leader -b 1 -e 2
-192.168.66.80:7000   tablet   is_raft_leader                                                                       1 y/n                 +1
+For YSQL objects/entities, `yb_stats` takes the OID from the object id and filters out OIDs lower than 16384, because these are system OIDs.
+
+Example:
 ```
-This shows that master 192.168.66.80:7000 was LEADER at end snapshot `2`, and the `+1` says that it wasn't the LEADER in snapshot 1. 
-
-Now with this information, use `--hostname-match` to filter the master LEADER output for the snapshot, and `--table-name-match` for the object you want to see:
-```shell
-yb_stats --print-entities 2 --hostname-match 80 --table-name-match transactions
-192.168.66.80:7000 ycql system transactions d75b983d5f8548c282034129fc2300d1 RUNNING
-tablet:1150848aeb004a1b813d208c7cc60f23 RUNNING : ( VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:3c7ece0980cc4755a97b6ceb2df6845e RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:4b723064c6064a36afb822d8125ae24d RUNNING : ( VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:4ea37645092f46068250b46551623c85 RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:4eca47aa83dd47a3bc7e1d54474ddaa4 RUNNING : ( VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:540c6c39858d4679bf6a1ffa41417be8 RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:5abf0e6155ea4f64860325f6cfd2332a RUNNING : ( VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:a0820acf79bb425ea30b511e5166830e RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER VOTER,yb-2.local:9100,FOLLOWER )
-tablet:d4012adab48741f98d9287715e4f94a5 RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,LEADER )
-tablet:e0ac5a9011874a668654e97ca348833d RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,LEADER )
-tablet:eb0f8f0ea4c446c3912ab7fe45846d0a RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,LEADER )
-tablet:f89c996a4b724e28804d3aadfcc0c75e RUNNING : ( VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER VOTER,yb-2.local:9100,LEADER )
+% yb_stats --print-entities
+Object:   ysql.yugabyte.t, state: RUNNING, id: 000033e8000030008000000000004000
+Tablet:   ysql.yugabyte.t.7f4fc16eba28432e8ed2baf4603f9590 state: RUNNING
+            ( VOTER,yb-2.local:9100,LEADER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.t.ce1302dada834f619e67dffc847a80fe state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.t.f035128dd43d43d3a1a9d4c44727df99 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER )
+Object:   ysql.yugabyte.tt, state: RUNNING, id: 000033e8000030008000000000004100
+Tablet:   ysql.yugabyte.tt.3ae53662d5374897b8a55899f7ceb9c4 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.tt.880a7b69ae4a474b96d3ff0b7117867b state: RUNNING
+            ( VOTER,yb-2.local:9100,LEADER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.tt.e844bce904794c9799301a2a95cdbe82 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER )
+Object:   ysql.yugabyte.ysql_bench_history, state: RUNNING, id: 000033e800003000800000000000413b
+Tablet:   ysql.yugabyte.ysql_bench_history.11476b9ff3bd4cdeb89a6b188de44b51 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_history.1f01c2e8a9ba467b8495b304649bcbde state: RUNNING
+            ( VOTER,yb-2.local:9100,LEADER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_history.fd9094233dc04e9fa17084b99c42fea6 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER )
+Object:   ysql.yugabyte.ysql_bench_tellers, state: RUNNING, id: 000033e800003000800000000000413e
+Tablet:   ysql.yugabyte.ysql_bench_tellers.918cba44a4d34b699aab6a53eb2399bf state: RUNNING
+            ( VOTER,yb-2.local:9100,LEADER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_tellers.a0a6a3f68cfd4ce697f9c412b74cf84d state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_tellers.d2b6e484972c4443868e1887d05bc7a4 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER )
+Object:   ysql.yugabyte.ysql_bench_accounts, state: RUNNING, id: 000033e8000030008000000000004143
+Tablet:   ysql.yugabyte.ysql_bench_accounts.43e33bb5a7a34a4c8b631d08f4544165 state: RUNNING
+            ( VOTER,yb-2.local:9100,LEADER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_accounts.634d9612c86e4a98a9ffdba70a76227f state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_accounts.da848f4a61ea43c7a7d903b1c28b6942 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER )
+Object:   ysql.yugabyte.ysql_bench_branches, state: RUNNING, id: 000033e8000030008000000000004148
+Tablet:   ysql.yugabyte.ysql_bench_branches.b243250ea9f145ccbb68119be37f540d state: RUNNING
+            ( VOTER,yb-2.local:9100,LEADER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_branches.b948c3f199954959b295c78d6f3f99c7 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,LEADER VOTER,yb-3.local:9100,FOLLOWER )
+Tablet:   ysql.yugabyte.ysql_bench_branches.d456575fb4a04b9ea9e438b93129aa2f state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER )
+Object:   ysql.testdb.testtable, state: RUNNING, id: 00004154000030008000000000004155
+Tablet:   ysql.testdb.testtable.5350a928953c4eb1aaa9eb0581a3112b state: RUNNING
+            ( VOTER,yb-2.local:9100,LEADER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,FOLLOWER )
+Object:   ysql.testdb.testindex, state: RUNNING, id: 0000415400003000800000000000415a
+Tablet:   ysql.testdb.testindex.16c89cf34d054f0fb9116534d366ec33 state: RUNNING
+            ( VOTER,yb-2.local:9100,FOLLOWER VOTER,yb-1.local:9100,FOLLOWER VOTER,yb-3.local:9100,LEADER )
 ```
+Using the `/dump-entities` endpoint it's not possible to make a distinction between the object types of table, index or materialized view.  
+
+- For every object, a full name is shown in the form of `[database type].[database/keyspace].[object name]`, the state and the id of the object.
+- An object contains one or more tablets. 
+- For every tablet: a full name is shown in the form of `[database type].[database/keyspace].[object name].[tablet id]`. 
+- A tablet has no name, only an id.
+- For every tablet there is also the replica information in between brackets. For every replica, the type, RPC hostname and port and follower or leader designation.

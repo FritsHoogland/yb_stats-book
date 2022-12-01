@@ -1,19 +1,19 @@
 # Specifying parallel
 
-The amount of parallellism can be set using the `--parallel` switch. By default, `yb_stats` uses a single thread for performing the work it is doing. For the work done in the code for each type of data and for fetching the data from the hosts fetching a specific type of data, it can perform work in parallel.
+The amount of parallelism can be set using the `--parallel` switch. By default, `yb_stats` uses a single thread for performing the work it is doing. For the work done in the code for each different type of datasource and for fetching data from the hosts fetching a specific type of data, it can perform work in parallel.
 
-There is no parallellism for obtain the data from the snapshots and presenting it.
+There is no parallelism for reading the data from the snapshots and presenting it.
 
-Please mind the above description of the way parallellism works in yb_stats means that parallellism is performed in two steps. This means that specifying parallellism should be done with great care not to make the parallellism too high.
+Please mind the above description of the way parallelism works in yb_stats means that parallelism is performed at two different points. 
+This means that specifying parallelism should be done with great care not to make the parallelism too high.
 
-The first step in which parallellism is performed is running the code for the specific type of data:
+This is how that works; threads are used for:
 
-- tserver, master, YCQL, YSQL metrics,
-- YSQL statements,
-- node-exporter metrics,  
-etc.  
-This will run `--parallel` number of threads for each of these types.
+1. Snapshot.
+   When a snapshot is created, each different [datasource](./data_sources.md) is executed by a thread.
+ 
+2. Requesting a hostname:port combination in a datasource thread.
+   The thread for each datasource will scan each hostnamer:port combination using a thread. 
 
-And then inside the code for tserver metrics, as well as YSQL statements, as well as node-exporter metrics, if `--parallel` is set to 3, it will loop over the specified nodes and inside that loop over specified ports, which will be done with `--parallel` number of threads again.
-
-
+This means that setting parallelism to will start 3 threads for 3 different datasources, and perform requesting data for 3 hostname:port combinations in each of the threads. Making the total number of threads in use 9.
+The reason for this combination is that most of the time in requesting data is spent idle waiting for response.

@@ -1,18 +1,20 @@
 # print-log
+Print log information from a snapshot.
 
-The `--print-log` switch takes a single argument, which is a snapshot number.
+- `--print-log <snapshot number>`: print log information from a stored snapshot.
 
 Additional switches:
-- `--hostname-match` to filter one or more hosts
+- `--hostname-match`: filter by hostname or port regular expression.
 - `--log-severity` filters log lines by the letter that indicates the severity. Default: WEF, optional: I.  
-  Explanation of the severity letters:  
-    - W: Warning
-    - E: Error
-    - F: Fatal
-    - I: Informal
+ 
+Explanation of the severity letters:  
+- W: Warning
+- E: Error
+- F: Fatal
+- I: Informal
 
 Example:
-```shell
+```
 yb_stats --print-log 2 --log-severity E
 --------------------------------------------------------------------------------------------------------------------------------------
 Host: 192.168.66.82:12000, Snapshot number: 2, Snapshot time: 2022-10-18 12:33:16.008276 +02:00

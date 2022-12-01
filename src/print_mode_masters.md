@@ -1,23 +1,27 @@
 # print-masters
+Print the current masters from a live cluster or from a snapshot.
 
-The `--print-masters` siwtch takes a single argument, which is a snapshot number.
+- `--print-masters <snapshot number>`: print masters from a stored snapshot.
+- `--print-masters`: print masters from a live cluster.
 
 Additional switches:
-- `--hostname-match` to filter one or more hosts.
+- `--details-enable`: print the master information from all masters.
+ 
+In order to get the current information, `yb_stats` fetches information to learn the master leader first, and then obtains the entity information from the master leader, unless the `--details-enable` switch is set.
 
 Example:
-```shell
-yb_stats --print-masters 2 --hostname-match 80
---------------------------------------------------------------------------------
-Source host: 192.168.66.80:7000, snapshot time: 2022-10-18 15:26:20.210094 +02:00
---------------------------------------------------------------------------------
-Permanent UUID:1a11d26f9add4b799c23a1660fd0418d, Instance Seqno:1666096364509506, Start time:1666096364509506us, Cloud:local, Region:local, Zone:local, Role:FOLLOWER
-RPC addresses: ( yb-2.local:7100  )
-HTTP addresses: ( yb-2.local:7000  )
-Permanent UUID:748f9c424d114586b29a0311d0ac4d75, Instance Seqno:1666096333830061, Start time:1666096333830061us, Cloud:local, Region:local, Zone:local, Role:LEADER
-RPC addresses: ( yb-1.local:7100  )
-HTTP addresses: ( yb-1.local:7000  )
-Permanent UUID:c15b0b8033574547946b9aa9fdde9336, Instance Seqno:1666096396652361, Start time:1666096396652361us, Cloud:local, Region:local, Zone:local, Role:FOLLOWER
-RPC addresses: ( yb-3.local:7100  )
-HTTP addresses: ( yb-3.local:7000  )
+```
+% yb_stats --print-masters
+d3db2544098b4b808c0c65d4d19f4d3a LEADER   Cloud: local, Region: local, Zone: local
+                                 Seqno: 1669886426374545 Start time: 1669886426374545
+                                 RPC addresses: ( yb-1.local:7100  )
+                                 HTTP addresses: ( yb-1.local:7000  )
+5334e8170e74496c9780d64e09177010 FOLLOWER Cloud: local, Region: local, Zone: local
+                                 Seqno: 1669886456237856 Start time: 1669886456237856
+                                 RPC addresses: ( yb-2.local:7100  )
+                                 HTTP addresses: ( yb-2.local:7000  )
+b460d504c6aa488d97bfe266ab506ab6 FOLLOWER Cloud: local, Region: local, Zone: local
+                                 Seqno: 1669886489682609 Start time: 1669886489682609
+                                 RPC addresses: ( yb-3.local:7100  )
+                                 HTTP addresses: ( yb-3.local:7000  )
 ```

@@ -28,12 +28,12 @@ Install the provided yb_stats RPM via yum:
 
 EL7:
 ```shell
-sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.8.7/yb_stats-0.8.7-1.el7.x86_64.rpm
+sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.8.8/yb_stats-0.8.8-1.el7.x86_64.rpm
 ```
 
 EL8:
 ```shell
-sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.8.7/yb_stats-0.8.7-1.el8.x86_64.rpm
+sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.8.8/yb_stats-0.8.8-1.el8.x86_64.rpm
 ```
 
 After yum install, yb_stats is available in /usr/local/bin, which should normally be in $PATH.
@@ -57,7 +57,7 @@ Build yb_stats:
 cd yb_stats
 cargo build --release
 ```
-yb_stats is in ./target/release/ directory.
+The `yb_stats` is available in ./target/release/ directory after successful compilation.
 
 ## Linux compile from source
 
@@ -80,4 +80,4 @@ Build yb_stats:
 cd yb_stats
 cargo build --release
 ```
-yb_stats is in ./target/release/ directory.
+The `yb_stats` is available in ./target/release/ directory after successful compilation.

@@ -1,14 +1,15 @@
 # print-memtrackers
+Print the memtracker page from a snapshot.
 
-The `--print-memtrackers` switch takes a single argument, which is a snapshot number.
+`--print-memtrackers <snapshot number>`: print memtrackers information from a stored snapshot.
 
 Additional switches:
-- `--hostname-match` to filter one or more hosts.
-- `--stat-name-match` to filter on the memory names as seen as 'id' in the output.
+- `--hostname-match`: filter by hostname or port regular expression.
+- `--stat-name-match`: filter by memory area name (id) regular expression.
 
 Example:
-```shell
-yb_stats --print-memtrackers 2 --hostname-match 82:700 --stat-name-match '(root|TCMalloc|server)'
+```
+% yb_stats --print-memtrackers 2 --hostname-match 82:700 --stat-name-match '(root|TCMalloc|server)'
 --------------------------------------------------------------------------------------------------------------------------------------
 Host: 192.168.66.82:7000, Snapshot number: 2, Snapshot time: 2022-10-18 15:26:20.125948 +02:00
 --------------------------------------------------------------------------------------------------------------------------------------

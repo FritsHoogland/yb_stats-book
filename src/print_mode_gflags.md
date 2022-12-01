@@ -1,14 +1,15 @@
 # print-gflags
+Print gflags information from a snapshot.
 
-The `--print-gflags` switch takes a single argument, which is a snapshot number.
+- `--print-gflags <snapshot number>`: print gflags from a stored snapshot.
 
 Additional switches:
-- `--hostname-match` to filter one or more hosts.
-- `--stat-name-match` to filter by one or more gflag names.
+- `--hostname-match`: filter by hostname or port regular expression.
+- `--stat-name-match` filter by gflag name regular expression.
 
 Example:
-```shell
- yb_stats --print-gflags 2 --hostname-match 82:700 --stat-name-match wal
+```
+% yb_stats --print-gflags 2 --hostname-match 82:700 --stat-name-match wal
 --------------------------------------------------------------------------------------------------------------------------------------
 Host: 192.168.66.82:7000, Snapshot number: 2, Snapshot time: 2022-10-18 15:26:20.128980 +02:00
 --------------------------------------------------------------------------------------------------------------------------------------

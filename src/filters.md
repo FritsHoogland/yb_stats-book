@@ -1,3 +1,10 @@
 # filters
 
-The different 'query modes' of `yb_stats`, which are ad-hoc mode, snapshot mode and the print modes, allow to filter data based on different criteria. This is very useful, because most sources of data contain lots of information, which could make it hard to find what you are looking for.
+Filter can be used for showing data, and are never used for creating snapshots.
+
+To be more concrete, filters can be used with the following usage:
+- No switches/ad-hoc mode.
+- Snapshot-diff mode.
+- Print modes, depending on the print topic.
+
+Filters usage regular expressions for optimal flexibility.

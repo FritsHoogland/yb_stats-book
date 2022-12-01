@@ -1,6 +1,8 @@
 # Snapshot-diff mode
 
-The purpose of snapshot-diff mode is to be able to investigate using already stored snapshots.
+The purpose of snapshot-diff mode is to read two snapshots which must be locally stored, and show a difference report.
+
+
 
 Snapshot-diff mode means using already stored snapshots, which can be from a cluster that currently is unavailable or even deleted, because the snapshot-diff mode only uses the information that is stored in the locally available snapshot (CSV) data.
 This gives a lot of options for investigation that otherwise would be hard or painful, and allows to investigate airgapped clusters (clusters that are not connected to the internet). 
