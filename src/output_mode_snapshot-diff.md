@@ -1,17 +1,23 @@
-# Snapshot-diff mode
-
+# snapshot-diff mode
 The purpose of snapshot-diff mode is to read two snapshots which must be locally stored, and show a difference report.
 
+Additional switches:
+- `--hostname-match`: filter by hostname or port regular expression.
+- `--stat-name-match`: filter by statistic name regular expression.
+- `--table-name-match`: filter by table name regular expression (requires `--details-enable` to split table and tablet statistics out).
+- `--details-enable`: split table and tablet statistics, instead of summarizing these per server.
+- `--gauges-enable`: add non-counter statistics to the output.
+- `-b`/`--begin`: set the begin snapshot number.
+- `-e`/`--end`: set the end snapshot number.
 
-
-Snapshot-diff mode means using already stored snapshots, which can be from a cluster that currently is unavailable or even deleted, because the snapshot-diff mode only uses the information that is stored in the locally available snapshot (CSV) data.
+snapshot-diff mode means using already stored snapshots, which can be from a cluster that currently is unavailable or even deleted, because the snapshot-diff mode only uses the information that is stored in the locally available snapshot (CSV) data.
 This gives a lot of options for investigation that otherwise would be hard or painful, and allows to investigate airgapped clusters (clusters that are not connected to the internet). 
 
 The way to invoke snapshot-diff mode is to use the `--snapshot-diff` switch. 
 
 If `--snapshot-diff` is used without `-b`/`--begin` <snapshot number> and `-e`/`--end` <snapshot number> options, it will present the available snapshot numbers with their timestamp and comments and ask for the option that is not specified. Otherwise the snapshot-diff is directly created and shown.
 
-Snapshot-diff without begin/end specification:
+snapshot-diff without begin/end specification:
 ```shell
 yb_stats --snapshot-diff
   0 2022-10-17 19:50:58.048195 +02:00
@@ -28,7 +34,7 @@ Enter end snapshot: 1
 192.168.66.80:12000  server   voluntary_context_switches                                                       21821 csws           226.613 /s
 ```
 
-Snapshot-diff with begin/end specification:
+snapshot-diff with begin/end specification:
 ```shell
 yb_stats --snapshot-diff -b 0 -e 1
 192.168.66.80:12000  server   cpu_stime                                                                          654 ms               6.792 /s
