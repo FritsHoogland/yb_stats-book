@@ -44,7 +44,7 @@ These are current latest versions. Look [yb_stats github repository releases pag
 
 Install Rust via rustup:
 ```shell
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.sh | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 Clone the yb_stats repository:
