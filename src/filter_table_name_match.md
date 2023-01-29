@@ -12,16 +12,21 @@ yb_stats --details-enable --table-name-match catalog --hostname-match 7000
 Begin metrics snapshot created, press enter to create end snapshot for difference calculation.
 
 Time between snapshots:    0.679 seconds
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_block_cache_bytes_read                       300447 bytes       441185.022 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_block_cache_data_hit                              6 blocks           8.811 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_block_cache_hit                                  15 blocks          22.026 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_block_cache_index_hit                             9 blocks          13.216 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_block_cache_single_touch_bytes_read          300447 bytes       441185.022 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_block_cache_single_touch_hit                     15 blocks          22.026 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_db_iter_bytes_read                              618 bytes          907.489 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_no_table_cache_iterators                          6 iters            8.811 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_number_db_next                                    9 keys            13.216 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_number_db_next_found                              9 keys            13.216 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_number_db_seek                                    6 keys             8.811 /s
-192.168.66.80:7000   tablet   000000000000000                 sys.catalog                    rocksdb_number_db_seek_found                              6 keys             8.811 /s
+
+Begin ad-hoc in-memory snapshot created, press enter to create end snapshot for difference calculation.
+
+Time between snapshots:    1.621 seconds
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_block_cache_bytes_read                                                 4095007 bytes      2545063.393 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_block_cache_data_hit                                                        97 blocks          60.286 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_block_cache_hit                                                            172 blocks         106.899 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_block_cache_index_hit                                                       75 blocks          46.613 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_block_cache_single_touch_bytes_read                                    4095007 bytes      2545063.393 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_block_cache_single_touch_hit                                               172 blocks         106.899 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_db_iter_bytes_read                                                     1353537 bytes       841228.713 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_no_table_cache_iterators                                                    48 iters           29.832 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_number_db_next                                                            2180 keys          1354.879 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_number_db_next_found                                                      2225 keys          1382.846 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_number_db_seek                                                             131 keys            81.417 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_number_db_seek_found                                                       122 keys            75.823 /s
+192.168.66.81:7000   tablet   00000000000000000000000000000000 sys.catalog                    rocksdb_number_superversion_acquires                                                 4 nr               2.486 /s
 ```

@@ -11,4 +11,7 @@ Are set in the `.env` file, it will use the set value. This way, specifying eith
 
 If a flag is specified with `yb_stats` that is also set in `.env`, the flag specified with `yb_stats` will be given preference, and the entry in `.env` will be overwritten with this new value.
 
-Please mind that if something outside of `yb_stats` is using `.env` for its own purposes and sets its own values in the file, and `yb_stats` is run, it will overwrite the file and remove any settings not used with `yb_stats`.
+# WARNING
+Please mind that if something outside of `yb_stats` is using `.env` for its own purposes and sets its own values in the file, 
+running `yb_stats` with the current working directory holding a `.env` file used by a third party, will __overwrite__ the file and only set the `yb_stats` values, removing any settings not used with `yb_stats`.
+

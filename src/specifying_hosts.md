@@ -11,3 +11,10 @@ Example:
 ```shell
 yb_stats --hosts 10.1.0.1,10.1.0.2,10.1.03
 ```
+
+The set hosts (as well as ports and parallellism) is stored in the file `.env` in the current working directory. 
+This means that if you have different YugabyteDB clusters you want to use, you either:
+- Need to specify the hosts every usage, which will still create a `.env` file, but is not used because of the specification.
+- Use a different directory for each cluster.
+
+Using a different directory is highly recommended, especially because then the snapshots will be about the cluster specified only too.

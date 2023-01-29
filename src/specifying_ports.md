@@ -13,3 +13,9 @@ Example:
 yb_stats --ports 7000,9000,12000,13000
 ```
 As an example, this list excludes the 9300 port for node-exporter.
+
+The set ports (as well as hosts and parallellism) is stored in the file `.env` in the current working directory. This means that if you have different YugabyteDB clusters you want to use, you either:
+- Need to speicify the ports every usage, which will still create a `.env` file, but is not used because of the specification.
+- use a different directory for each cluster.
+ 
+Using a different directory is highly recommended, especially because then the snapshots will be about the cluster specified only too.

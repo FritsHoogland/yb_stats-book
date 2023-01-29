@@ -1,5 +1,10 @@
 # Upgrade
 
+## Warning
+Be aware that when upgrading from a version before 0.9 that the snapshot format has changed.
+- Before `yb_stats` version 0.9, the snapshot data is stored as CSV.
+- Starting from `yb_stats` version 0.9, the snapshot data is stored as JSON.
+
 ## Mac OSX via [homebrew](https://brew.sh)
 
 This will upgrade the current installed version to the latest available tap version.

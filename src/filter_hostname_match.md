@@ -7,7 +7,7 @@ Very simple use of `--hostname-match` is to filter on the port number, to specif
 yb_stats --hostname-match 9000
 ```
 
-Or specify to use only the tablet server and master servers, thereby filtering the node-exporter output:
+Or specify to use only the tablet server and master servers, thereby filtering the node-exporter, YEDIS, YCQL and YSQL output:
 ```shell
 yb_stats --hostname-match '(7000|9000)'
 ```

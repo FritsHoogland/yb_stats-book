@@ -3,11 +3,20 @@
 When `yb_stats` is run without any switch, or only the data or filter switches, it will perform a snapshot in memory, and wait for enter to perform the next snapshot and present the difference.
 This is called 'ad-hoc mode'.
 
-The usage of either ad-hoc mode or snapshot mode should be carefully considered. ad-hoc alias in-memory snapshots do not write anything. 
-In most cases performing snapshots persisting all the available information is the best way, so results can be reviewed because they are persisted.
+This will not only show the difference for performance based statistics (the metric counters and optionally gauges), but also any change in the cluster, such as:
+- The addition or removal of tablet servers or masters.
+- Restarts of tablet servers or masters.
+- The creation or removal of database objects (tables, indexes, materialized views, databases/keyspaces).
+- The change of any gflags of the tablet servers or masters.
+- Any change for a replica, notably the LEADER or FOLLOWER state.
+- Role changes for the masters.
+
+The usage of either ad-hoc mode or snapshot mode should be carefully considered. 
+ad-hoc alias in-memory snapshots does not write anything. 
+In most cases performing snapshots persisting all the available information is the best way, so results can be reviewed later, and cannot get lost, because they are stored.
 However, if you are performing repeated tests where storing all snapshot information would simply be too much and would require you to remove all the snapshots after testing anyways AND you are shure what to look for, then ad-hoc mode might be used.
 
-# example
+# Example
 This is how the first snapshot looks like in ad-hoc mode:
 ```
 % yb_stats
