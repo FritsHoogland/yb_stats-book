@@ -13,3 +13,6 @@ it must be able to access the YugabyteDB cluster nodes, and be allowed to access
 
 If `yb_stats` is run for investigating snapshots using print mode or snapshot-diff mode, 
 there is no need to access the cluster ip addresses or ports, it will use the snapshot CSV data only.
+
+For a more comprehensive view into the objects in the cluster, as well as the tablets, the `--extra-data` switch can be used.
+This switch will obtain detailed data about objects as well as tablets, at the cost of performing more work, and thus taking longer time. See [the `--extra-data` switch](./snapshot_results_extra_data.md).
