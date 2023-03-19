@@ -21,3 +21,5 @@ In the same snapshot, the master `b460d504c6aa488d97bfe266ab506ab6` had it's rol
 The reason for role change from LEADER to FOLLOWER can not be seen, but the start time and the seqno properties also did change.
 The change of start time shows the start time was renewed, indicating the master was restarted.
 The sequence number is identical to the start time, and therefore changed along with the start time.
+
+Please mind that if no changed happened between the begin and end snapshot, no output will be shown.

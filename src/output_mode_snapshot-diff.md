@@ -10,7 +10,8 @@ Additional switches:
 - `-b`/`--begin`: set the begin snapshot number.
 - `-e`/`--end`: set the end snapshot number.
 
-snapshot-diff mode means using already stored snapshots, which can be from a cluster that currently is unavailable or even deleted, because the snapshot-diff mode only uses the information that is stored in the locally available snapshot (CSV) data.
+snapshot-diff mode means using already stored snapshots, which can be from a cluster that currently is unavailable or even deleted, 
+because the snapshot-diff mode only uses the information that is stored in the locally available snapshot (JSON) data.
 This gives a lot of options for investigation that otherwise would be hard or painful, and allows to investigate airgapped clusters (clusters that are not connected to the internet). 
 
 The way to invoke snapshot-diff mode is to use the `--snapshot-diff` switch. 
@@ -46,3 +47,14 @@ yb_stats --snapshot-diff -b 0 -e 1
 192.168.66.80:12000  server   voluntary_context_switches                                                       21821 csws           226.613 /s
 ...etc...
 ```
+
+The `--snapshot-diff` shows all different data points for showing differences:
+- Metrics
+- (YSQL) statements
+- Node-exporter
+- Versions (master and tablet server software versions)
+- Entities (YSQL and YCQL objects (tables, indexes and materialized views), databases/keyspaces, tablets and replicas)
+- Master status
+- Tablet server status
+- Vars (gflags)
+- Health check (from the master)
