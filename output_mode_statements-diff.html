@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>yb_stats --statements-diff - yb_stats book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="data_sources.html"><strong aria-hidden="true">2.</strong> Data sources</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">3.</strong> Install</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="upgrade.html"><strong aria-hidden="true">3.1.</strong> Upgrade</a></li></ol></li><li class="chapter-item expanded "><a href="running_yb_stats.html"><strong aria-hidden="true">4.</strong> Running yb_stats</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="specifying_hosts.html"><strong aria-hidden="true">4.1.</strong> Specifying hosts</a></li><li class="chapter-item expanded "><a href="specifying_ports.html"><strong aria-hidden="true">4.2.</strong> Specifying ports</a></li><li class="chapter-item expanded "><a href="specifying_parallel.html"><strong aria-hidden="true">4.3.</strong> Specifying parallel</a></li><li class="chapter-item expanded "><a href="dotenv.html"><strong aria-hidden="true">4.4.</strong> .env</a></li><li class="chapter-item expanded "><a href="snapshot_results.html"><strong aria-hidden="true">4.5.</strong> yb_stats --snapshot</a></li><li class="chapter-item expanded "><a href="snapshot_results_extra_data.html"><strong aria-hidden="true">4.6.</strong> yb_stats --snapshot --extra-data</a></li></ol></li><li class="chapter-item expanded "><a href="output_modes.html"><strong aria-hidden="true">5.</strong> Output modes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="snapshot_usage.html"><strong aria-hidden="true">5.1.</strong> Using snapshots</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">5.2.</strong> Data filters</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="filter_hostname_match.html"><strong aria-hidden="true">5.2.1.</strong> --hostname-match</a></li><li class="chapter-item expanded "><a href="filter_stat_name_match.html"><strong aria-hidden="true">5.2.2.</strong> --stat-name-match</a></li><li class="chapter-item expanded "><a href="filter_table_name_match.html"><strong aria-hidden="true">5.2.3.</strong> --table-name-match</a></li></ol></li><li class="chapter-item expanded "><a href="data_enrichment.html"><strong aria-hidden="true">5.3.</strong> Data enrichment</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="output_mode_gauges.html"><strong aria-hidden="true">5.3.1.</strong> --gauges-enable</a></li><li class="chapter-item expanded "><a href="output_mode_details-enable.html"><strong aria-hidden="true">5.3.2.</strong> --details-enable</a></li></ol></li><li class="chapter-item expanded "><a href="adhoc_results.html"><strong aria-hidden="true">5.4.</strong> yb_stats</a></li><li class="chapter-item expanded "><a href="output_mode_snapshot-diff.html"><strong aria-hidden="true">5.5.</strong> yb_stats --snapshot-diff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="output_mode_metrics-diff.html"><strong aria-hidden="true">5.5.1.</strong> yb_stats --metrics-diff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="output_metrics.html"><strong aria-hidden="true">5.5.1.1.</strong> Metrics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="output_metrics_value.html"><strong aria-hidden="true">5.5.1.1.1.</strong> Value statistics</a></li><li class="chapter-item expanded "><a href="output_metrics_countsum.html"><strong aria-hidden="true">5.5.1.1.2.</strong> CountSum statistics</a></li><li class="chapter-item expanded "><a href="output_metrics_countsumrows.html"><strong aria-hidden="true">5.5.1.1.3.</strong> CountSumRows statistics</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="output_mode_node-exporter-diff.html"><strong aria-hidden="true">5.5.2.</strong> yb_stats --node-exporter-diff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="output_metrics_nodeexporter.html"><strong aria-hidden="true">5.5.2.1.</strong> Node-exporter statistics</a></li></ol></li><li class="chapter-item expanded "><a href="output_mode_statements-diff.html" class="active"><strong aria-hidden="true">5.5.3.</strong> yb_stats --statements-diff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="output_metrics_statement.html"><strong aria-hidden="true">5.5.3.1.</strong> Statement statistics</a></li></ol></li><li class="chapter-item expanded "><a href="output_mode_versions-diff.html"><strong aria-hidden="true">5.5.4.</strong> yb_stats --versions-diff</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="output_version_diff.html"><strong aria-hidden="true">5.5.4.1.</strong> Version diff</a></li></ol></li><li class="chapter-item expanded "><a href="output_entity-diff.html"><strong aria-hidden="true">5.5.5.</strong> yb_stats --entity-diff</a></li><li class="chapter-item expanded "><a href="output_masters-diff.html"><strong aria-hidden="true">5.5.6.</strong> yb_stats --masters-diff</a></li><li class="chapter-item expanded "><a href="output_tablet-servers-diff.html"><strong aria-hidden="true">5.5.7.</strong> yb_stats --tablet-servers-diff</a></li><li class="chapter-item expanded "><a href="output_vars-diff.html"><strong aria-hidden="true">5.5.8.</strong> yb_stats --vars-diff</a></li><li class="chapter-item expanded "><a href="output_healthcheck-diff.html"><strong aria-hidden="true">5.5.9.</strong> yb_stats --healthcheck-diff</a></li></ol></li><li class="chapter-item expanded "><a href="output_mode_snapshot-nonmetrics-diff.html"><strong aria-hidden="true">5.6.</strong> yb_stats --snapshot-nonmetrics-diff</a></li><li class="chapter-item expanded "><a href="output_mode_adhoc-metrics-diff.html"><strong aria-hidden="true">5.7.</strong> yb_stats --adhoc-metrics-diff</a></li><li class="chapter-item expanded "><a href="output_mode_adhoc-node-exporter-diff.html"><strong aria-hidden="true">5.8.</strong> yb_stats --adhoc-node-exporter-diff</a></li><li class="chapter-item expanded "><a href="print_mode.html"><strong aria-hidden="true">5.9.</strong> Print modes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="print_mode_version.html"><strong aria-hidden="true">5.9.1.</strong> --print-version</a></li><li class="chapter-item expanded "><a href="print_mode_log.html"><strong aria-hidden="true">5.9.2.</strong> --print-log</a></li><li class="chapter-item expanded "><a href="tail_mode_log.html"><strong aria-hidden="true">5.9.3.</strong> --tail-log</a></li><li class="chapter-item expanded "><a href="print_mode_entities.html"><strong aria-hidden="true">5.9.4.</strong> --print-entities</a></li><li class="chapter-item expanded "><a href="print_mode_masters.html"><strong aria-hidden="true">5.9.5.</strong> --print-masters</a></li><li class="chapter-item expanded "><a href="print_mode_tablet_servers.html"><strong aria-hidden="true">5.9.6.</strong> --print-tablet-servers</a></li><li class="chapter-item expanded "><a href="print_mode_vars.html"><strong aria-hidden="true">5.9.7.</strong> --print-vars</a></li><li class="chapter-item expanded "><a href="print_mode_memtrackers.html"><strong aria-hidden="true">5.9.8.</strong> --print-memtrackers</a></li><li class="chapter-item expanded "><a href="print_mode_rpcs.html"><strong aria-hidden="true">5.9.9.</strong> --print-rpcs</a></li><li class="chapter-item expanded "><a href="print_mode_threads.html"><strong aria-hidden="true">5.9.10.</strong> --print-threads</a></li><li class="chapter-item expanded "><a href="print_mode_gflags.html"><strong aria-hidden="true">5.9.11.</strong> --print-gflags</a></li><li class="chapter-item expanded "><a href="print_mode_cluster-config.html"><strong aria-hidden="true">5.9.12.</strong> --print-cluster-config</a></li><li class="chapter-item expanded "><a href="print_mode_health-check.html"><strong aria-hidden="true">5.9.13.</strong> --print-health-check</a></li><li class="chapter-item expanded "><a href="print_mode_drives.html"><strong aria-hidden="true">5.9.14.</strong> --print-drives</a></li><li class="chapter-item expanded "><a href="print_mode_tablet-server-operations.html"><strong aria-hidden="true">5.9.15.</strong> --print-tablet-server-operations</a></li><li class="chapter-item expanded "><a href="print_mode_master-tasks.html"><strong aria-hidden="true">5.9.16.</strong> --print-master-tasks</a></li><li class="chapter-item expanded "><a href="print_mode_table-detail.html"><strong aria-hidden="true">5.9.17.</strong> --print-table-detail</a></li><li class="chapter-item expanded "><a href="print_mode_tablet-detail.html"><strong aria-hidden="true">5.9.18.</strong> --print-tablet-detail</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="crontab.html"><strong aria-hidden="true">6.</strong> Crontab</a></li><li class="chapter-item expanded "><a href="troubleshooting.html"><strong aria-hidden="true">7.</strong> Troubleshooting</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">yb_stats book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fritshoogland-yugabyte/yb_stats-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="statements-diff-mode"><a class="header" href="#statements-diff-mode">statements-diff mode</a></h1>
+<p>The purpose of statements-diff mode is to read two snapshots which must be locally stored, and show a difference report.</p>
+<p>Additional switches:</p>
+<ul>
+<li><code>--hostname-match</code>: filter by hostname or port regular expression.</li>
+<li><code>--sql-length</code>: the maximum length of a SQL statements, for readability. Default: 80.</li>
+<li><code>-b</code>/<code>--begin</code>: set the begin snapshot number.</li>
+<li><code>-e</code>/<code>--end</code>: set the end snapshot number.</li>
+</ul>
+<p>statements-diff mode means using already stored snapshots, which can be from a cluster that currently is unavailable or even deleted, 
+because the statements-diff mode only uses the information that is stored in the locally available snapshot (JSON) data.
+This gives a lot of options for investigation that otherwise would be hard or painful, and allows to investigate airgapped clusters (clusters that are not connected to the internet). </p>
+<p>The way to invoke versions-diff mode is to use the <code>--statements-diff</code> switch. </p>
+<p>If <code>--statements-diff</code> is used without <code>-b</code>/<code>--begin</code> <snapshot number> and <code>-e</code>/<code>--end</code> <snapshot number> options, 
+it will present the available snapshot numbers with their timestamp and comments and ask for the option that is not specified. 
+Otherwise the statements-diff is directly created and shown.</p>
+<p>versions-diff without begin/end specification:</p>
+<pre><code class="language-shell">yb_stats --statements-diff
+  0 2023-03-18 14:13:01.407795 +01:00
+  1 2023-03-18 14:13:53.959694 +01:00
+  2 2023-03-18 14:14:05.162338 +01:00
+  3 2023-03-19 14:20:50.977417 +01:00
+  4 2023-03-19 14:21:14.418544 +01:00
+  5 2023-03-19 14:24:17.733927 +01:00
+Enter begin snapshot: 4
+Enter end snapshot: 5
+192.168.66.80:13000           1 avg:           0.459 tot:           0.459 ms avg:          1 tot:          1 rows: select now()
+</code></pre>
+<p>statements-diff with begin/end specification:</p>
+<pre><code class="language-shell">yb_stats --statements-diff -b 4 -e 5
+192.168.66.80:13000           1 avg:           0.459 tot:           0.459 ms avg:          1 tot:          1 rows: select now()
+</code></pre>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/fritshoogland-yugabyte/yb_stats-book/edit/main/src/output_mode_statements-diff.md">Edit this page on GitHub.</a></footer>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="output_metrics_nodeexporter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="output_metrics_statement.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="output_metrics_nodeexporter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="output_metrics_statement.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
