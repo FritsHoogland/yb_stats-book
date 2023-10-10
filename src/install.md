@@ -28,12 +28,17 @@ Install the provided yb_stats RPM via yum:
 
 EL7:
 ```shell
-sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.8.8/yb_stats-0.8.8-1.el7.x86_64.rpm
+sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.9.8/yb_stats-0.9.8-el.7.x86_64.rpm
 ```
 
 EL8:
 ```shell
-sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.8.8/yb_stats-0.8.8-1.el8.x86_64.rpm
+sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.9.8/yb_stats-0.9.8-el.8.x86_64.rpm
+```
+
+EL9:
+```shell
+sudo yum install https://github.com/fritshoogland-yugabyte/yb_stats/releases/download/v0.9.8/yb_stats-0.9.8-el.9.x86_64.rpm
 ```
 
 After yum install, yb_stats is available in /usr/local/bin, which should normally be in $PATH.
